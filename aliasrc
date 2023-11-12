@@ -1,0 +1,10 @@
+#! /bin/sh
+
+alias d='du -h --max-depth=1 | sort -h'
+
+alias gs="gst"
+
+alias auei='setxkbmap fr'
+alias qsdf='xkbcomp -w0 $DOTDIR/coeur_io/linux/fr-coeur-io.xkb $DISPLAY'
+
+alias steam='./.steam/steam/steam.sh'

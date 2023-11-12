@@ -17,6 +17,8 @@ all:
     just cargo_tools
     just fzf
     just omz_plugins
+    just dotfile aliasrc
+    just confdir i3
     just refactor_post_install
     @echo "🎉 Done"
     @echo "To complete the installation, run: source {{post_install}}" 
@@ -28,6 +30,19 @@ refactor_post_install:
     echo "source ~/.aliasrc" > {{post_install}}
     echo "omz plugin enable \"$plugins\"" >> {{post_install}}
     echo "omz reload" >> {{post_install}}
+
+# Install the dotfile stem as ~/.stem
+dotfile stem:
+    ln -sb {{this_dir}}/{{stem}} {{home}}/.{{stem}}
+
+# Install the contents stem/* in ~/.config/stem/
+confdir stem:
+    mkdir -p {{home}}/.config/{{stem}}
+    @for file in `ls {{stem}}`; do \
+        cmd="ln -sb {{this_dir}}/{{stem}}/$file {{home}}/.config/{{stem}}/$file"; \
+        echo $cmd; \
+        $cmd; \
+    done
 
 # Install Oh-My-Zsh
 omz_install:
